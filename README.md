@@ -31,50 +31,101 @@ Implementation using C or pyhton code
 
 ## PROGRAM:
 PROGRAM:
-CaearCipher.
+```
+Caesar Cipher Encryption Code:
 #include <stdio.h>
-#include <stdlib.h>
- 
-// Function to perform Caesar Cipher encryption void caesarEncrypt(char *text, int key) {
-   for (int i = 0; text[i] != '\0'; i++) { char c = text[i];
-// Check if the character is an uppercase letter 
-    if (c >= 'A' && c <= 'Z') {
-    text[i] = ((c - 'A' + key) % 26 + 26) % 26 + 'A';
-    }
-// Check if the character is a lowercase letter
-    else if (c >= 'a' && c <= 'z') {
-        text[i] = ((c - 'a' + key) % 26 + 26) % 26 + 'a';
-    }
-// Ignore non-alphabetic characters
-    }
-}
 
-// Function to perform Caesar Cipher decryption 
-void caesarDecrypt(char *text, int key) {
-// Decryption is the same as encryption with a negative key 
-caesarEncrypt(text, -key);
+void encrypt(char text[], int shift) {
+    char ch;
+    for (int i = 0; text[i] != '\0'; ++i) {
+        ch = text[i];
+        
+        if (ch >= 'a' && ch <= 'z') {
+            ch = ch + shift;
+
+            if (ch > 'z') {
+                ch = ch - 'z' + 'a' - 1;
+            }
+
+            text[i] = ch;
+        } else if (ch >= 'A' && ch <= 'Z') {
+            ch = ch + shift;
+
+            if (ch > 'Z') {
+                ch = ch - 'Z' + 'A' - 1;
+            }
+
+            text[i] = ch;
+        }
+    }
 }
 
 int main() {
-char message[100]; // Declare a character array to store the message int key;
+    char text[100];
+    int shift;
 
-printf("Enter the message to encrypt: ");
-fgets(message, sizeof(message), stdin); // Read input from the user printf("Enter the Caesar Cipher key (an integer): ");
-scanf("%d", &key); // Read the key from the user
-// Encrypt the message using the Caesar Cipher caesarEncrypt(message, key); printf("Encrypted Message: %s", message);
-// Decrypt the message back to the original
- 
-caesarDecrypt(message, key); printf("Decrypted Message: %s", message); return 0;
+    printf("Enter a message to encrypt: ");
+    gets(text);
+
+    printf("Enter shift amount: ");
+    scanf("%d", &shift);
+
+    encrypt(text, shift);
+
+    printf("Encrypted message: %s\n", text);
+
+    return 0;
+}
+Caesar Cipher Decryption Code
+#include <stdio.h>
+
+void decrypt(char text[], int shift) {
+    char ch;
+    for (int i = 0; text[i] != '\0'; ++i) {
+        ch = text[i];
+        
+        if (ch >= 'a' && ch <= 'z') {
+            ch = ch - shift;
+
+            if (ch < 'a') {
+                ch = ch + 'z' - 'a' + 1;
+            }
+
+            text[i] = ch;
+        } else if (ch >= 'A' && ch <= 'Z') {
+            ch = ch - shift;
+
+            if (ch < 'A') {
+                ch = ch + 'Z' - 'A' + 1;
+            }
+
+            text[i] = ch;
+        }
+    }
 }
 
+int main() {
+    char text[100];
+    int shift;
+
+    printf("Enter a message to decrypt: ");
+    gets(text);
+
+    printf("Enter shift amount: ");
+    scanf("%d", &shift);
+
+    decrypt(text, shift);
+
+    printf("Decrypted message: %s\n", text);
+
+    return 0;
+}
+
+```
 
 ## OUTPUT:
-OUTPUT:
-Simulating Caesar Cipher
-
-
-Input : Anna University
-Encrypted Message : Dqqd Xqlyhuvlwb Decrypted Message : Anna University
+![Screenshot 2024-08-30 140959](https://github.com/user-attachments/assets/5b0ef596-9cfc-4662-9562-80fc0d835281)
+![Screenshot 2024-08-30 140914](https://github.com/user-attachments/assets/6b85d93e-cc75-47bb-afd5-d2a62b9de923)
 
 ## RESULT:
 The program is executed successfully
